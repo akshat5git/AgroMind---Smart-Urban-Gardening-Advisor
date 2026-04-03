@@ -1,5 +1,8 @@
+export const runtime = "nodejs";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { prisma } from "@/lib/prisma"
+
 
 const handler = NextAuth({
   providers: [
@@ -11,6 +14,11 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         // Replace with DB logic later
+                
+        const user = await prisma.user.findUnique({
+          where: { email: "test@gmail.com" },
+        })
+
         if (
           credentials?.email === "test@gmail.com" &&
           credentials?.password === "1234"

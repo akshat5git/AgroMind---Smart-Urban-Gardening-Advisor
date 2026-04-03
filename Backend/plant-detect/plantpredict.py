@@ -19,7 +19,7 @@ WEIGHTS_PATH = "best_plantvillage_weights.h5"
 CLASS_NAMES_PATH = "plantvillage_class_names.json"
 
 # 👉 Change this to your test image
-IMAGE_PATH = "test.jpg"
+IMAGE_PATH = "images (1).jpg"
 
 # ============================================
 # LOAD CLASS NAMES
