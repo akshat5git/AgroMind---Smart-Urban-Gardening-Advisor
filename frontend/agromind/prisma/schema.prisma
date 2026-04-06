@@ -4,15 +4,242 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
 }
+
+
+model Account {
+  id                String @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+
+  refresh_token String? @db.Text
+  access_token  String? @db.Text
+  expires_at    Int?
+  token_type    String?
+  scope         String?
+  id_token      String? @db.Text
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
 model User {
-  id       String @id @default(cuid())
-  name     String
-  email    String @unique
-  password String
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?   // For email/password auth
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  gardens         Garden[]
+  plantings       Planting[]
+  chatbotSessions ChatbotSession[]
+  posts           CommunityPost[]
+  careSchedules   CropRecommendation[]
+}
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+model Garden {
+  id        String @id @default(cuid())
+  name      String
+  spaceType String // "balcony", "terrace", "indoor"
+  area      Float // in sq ft
+
+  location  String
+  latitude  Float
+  longitude Float
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  plantings Planting[]
+  createdAt DateTime   @default(now())
+}
+
+model Plant {
+  id String @id @default(cuid())
+
+  // 🌱 Basic Info
+  plantId        String  @unique // "PLT001"
+  commonName     String
+  scientificName String?
+
+  family    String?
+  kingdom   String?
+  division  String?
+  className String? // "class" is reserved keyword
+  order     String?
+  genus     String?
+  species   String?
+
+  category  String
+  cropType  String?
+  lifeCycle String?
+
+  origin String?
+
+  // 🌍 Local Names
+  localNames Json? // { english, hindi, bhojpuri }
+
+  // 🌡️ Climate & Conditions
+  suitableClimate Json? // ["Warm", "Moderate Humidity"]
+
+  minTemp Float
+  maxTemp Float
+
+  soilType Json? // ["Loamy", "Well-drained"]
+
+  sunlightRequirement String?
+  wateringRequirement String?
+
+  // 🌱 Growth Info
+  growthStages Json? // ["Seedling", "Flowering", etc.]
+
+  // 🧪 Nutrients & Uses
+  nutrientRequirements Json?
+  uses                 Json?
+
+  // 🦠 Issues (basic version)
+  commonIssues Json?
+
+  // 🤖 AI Support
+  isSupportedByModel Boolean @default(false)
+
+  // 🖼️ Media
+  imageUrls Json?
+
+  // 👤 Relations
+  plantings Planting[]
+
+  // 📅 Metadata
+  createdAt DateTime @default(now())
+
+  // 🦠 Disease Relation
+}
+
+model Planting {
+  id        String   @id @default(cuid())
+  plantedAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  gardenId String
+
+  garden Garden @relation(fields: [gardenId], references: [id])
+
+  plantId String
+  plant   Plant  @relation(fields: [plantId], references: [id])
+
+  healthReports PlantHealthReport[]
+  schedules     CareSchedule[]
+}
+
+model CareSchedule {
+  id String @id @default(cuid())
+
+  type      String // "watering", "fertilizer", "pruning", "treatment"
+  frequency Int // in days (e.g., every 2 days)
+  lastDone  DateTime?
+  nextDue   DateTime
+
+  notes String?
+
+  plantingId String
+  planting   Planting @relation(fields: [plantingId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model PlantHealthReport {
+  id         String @id @default(cuid())
+  imageUrl   String
+  disease    String
+  confidence Float
+
+  plantingId String
+  planting   Planting @relation(fields: [plantingId], references: [id])
+
+  treatment  Json // 🔥 organic + chemical
+  prevention Json
+
+  createdAt DateTime @default(now())
+}
+
+model Weather {
+  id          String @id @default(cuid())
+  location    String
+  temperature Float
+  humidity    Float
+
+  recordedAt DateTime
+}
+
+model CropRecommendation {
+  id String @id @default(cuid())
+
+  location    String
+  temperature Float
+  spaceType   String
+
+  recommended Json // ["Basil", "Tomato"]
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model ChatbotSession {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  messages  ChatbotMessage[]
+  createdAt DateTime         @default(now())
+}
+
+model ChatbotMessage {
+  id      String @id @default(cuid())
+  role    String // "user" | "ai"
+  content String
+
+  sessionId String
+  session   ChatbotSession @relation(fields: [sessionId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model CommunityPost {
+  id      String @id @default(cuid())
+  content String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
 }

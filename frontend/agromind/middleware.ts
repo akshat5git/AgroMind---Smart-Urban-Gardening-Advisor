@@ -1,10 +1,11 @@
-// middleware.ts
-export { default } from "next-auth/middleware"
+import { withAuth } from "next-auth/middleware"
+
+export default withAuth({
+  pages: {
+    signIn: "/signin",
+  },
+})
 
 export const config = {
-  matcher: [
-    "/dashboard",
-    "/profile",
-    "/((?!api|_next|signin).*)" // protect everything except signin & api
-  ],
+  matcher: ["/((?!api|_next|signin|signup|$).*)"],
 }

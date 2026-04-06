@@ -1,7 +1,18 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+
 export default function NotFound() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace("/dashboard") // ✅ better than push
+  }, [])
+
   return (
     <div className="h-screen flex items-center justify-center">
-      <h1 className="text-2xl font-bold">Page not found 🚫</h1>
+      <p>Redirecting...</p>
     </div>
   )
 }
