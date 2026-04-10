@@ -24,8 +24,8 @@
     "nutrient_requirements": ["Nitrogen", "Phosphorus", "Potassium", "Calcium"],
     "common_issues": ["Early Blight", "Late Blight", "Leaf Mold", "Bacterial Spot"],
     "uses": ["Food", "Salads", "Sauce"],
-    "is_supported_by_model": true,
-    "image_urls": [],
+    "is_supported_by_model": true, 
+    "image_urls": [], 
     "created_at": "2026-04-03T00:00:00Z"
   },
   {

@@ -7,6 +7,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 
 export default function SignupPage() {
+
+
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ export default function SignupPage() {
     email: "",
     password: "",
   });
+
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,7 +33,7 @@ export default function SignupPage() {
     }));
   };
   const captchaRef = useRef<ReCAPTCHA | null>(null);
- 
+
 
   // ✅ disable button logic
   const isDisabled =

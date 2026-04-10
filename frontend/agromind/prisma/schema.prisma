@@ -11,7 +11,6 @@ datasource db {
   provider = "postgresql"
 }
 
-
 model Account {
   id                String @id @default(cuid())
   userId            String
@@ -33,62 +32,90 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  password      String?   // For email/password auth
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  accounts      Account[]
-  sessions      Session[]
+  id              String               @id @default(cuid())
+  name            String?
+  email           String?              @unique
+  password        String? // For email/password auth
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime             @default(now())
+  accounts        Account[]
+  sessions        Session[]
   gardens         Garden[]
   plantings       Planting[]
   chatbotSessions ChatbotSession[]
   posts           CommunityPost[]
   careSchedules   CropRecommendation[]
 }
+
 model Session {
+
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
 }
 
 model VerificationToken {
+
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
+
 }
+
 model Garden {
   id        String @id @default(cuid())
   name      String
-  spaceType String // "balcony", "terrace", "indoor"
-  area      Float // in sq ft
+
+  spaceType SpaceType   // ✅ enum used
+  area      Float
 
   location  String
   latitude  Float
   longitude Float
 
+  sunlight  Sunlight    // ✅ enum used
+  water     Water       // ✅ enum used
+
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
   plantings Planting[]
-  createdAt DateTime   @default(now())
+  createdAt DateTime @default(now())
+}
+enum Sunlight {
+  LOW
+  MEDIUM
+  FULL
 }
 
+enum Water {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum SpaceType {
+  BALCONY
+  TERRACE
+  INDOOR
+  BACKYARD
+  ROOFTOP
+  GREENHOUSE
+  FARM
+  COMMUNITY_GARDEN
+  VERTICAL_GARDEN
+}
 model Plant {
   id String @id @default(cuid())
-
   // 🌱 Basic Info
   plantId        String  @unique // "PLT001"
   commonName     String
   scientificName String?
-
   family    String?
   kingdom   String?
   division  String?
@@ -96,26 +123,20 @@ model Plant {
   order     String?
   genus     String?
   species   String?
-
   category  String
   cropType  String?
   lifeCycle String?
-
   origin String?
-
   // 🌍 Local Names
   localNames Json? // { english, hindi, bhojpuri }
-
   // 🌡️ Climate & Conditions
   suitableClimate Json? // ["Warm", "Moderate Humidity"]
-
   minTemp Float
   maxTemp Float
-
   soilType Json? // ["Loamy", "Well-drained"]
-
-  sunlightRequirement String?
-  wateringRequirement String?
+  sunlightRequirement Sunlight
+  wateringRequirement Water
+  spaceType SpaceType[]
 
   // 🌱 Growth Info
   growthStages Json? // ["Seedling", "Flowering", etc.]

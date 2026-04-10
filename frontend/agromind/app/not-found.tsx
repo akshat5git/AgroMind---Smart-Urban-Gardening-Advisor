@@ -6,9 +6,7 @@ import { useEffect } from "react"
 export default function NotFound() {
   const router = useRouter()
 
-  useEffect(() => {
-    router.replace("/dashboard") // ✅ better than push
-  }, [])
+
 
   return (
     <div className="h-screen flex items-center justify-center">
