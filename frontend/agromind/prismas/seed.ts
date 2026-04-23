@@ -1,55 +1,51 @@
-import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
+
+import { PrismaClient, SpaceType, Sunlight, Water } from "@prisma/client";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
+// Debug (optional)
+console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Loaded ✅" : "Missing ❌");
 
+// Fix __dirname for ES modules
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const prisma = new PrismaClient({
-  adapter: new PrismaPg({
-    connectionString: process.env.DATABASE_URL!,
-  }),
-});
+// Prisma client
+const prisma = new PrismaClient();
 
+// JSON file path
+const filePath = path.join(__dirname, "data", "p1.json");
 
-const filePath = path.join(__dirname, "plants.json");
-const plants = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+// Check file exists
+if (!fs.existsSync(filePath)) {
+  console.error("❌ JSON file not found at:", filePath);
+  process.exit(1);
+}
 
-const mapSunlight = (value?: string): "LOW" | "MEDIUM" | "FULL" => {
+// Read JSON
+const plants: any[] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+// 🌞 Sunlight mapper
+const mapSunlight = (value?: string): Sunlight => {
   if (!value) return "MEDIUM";
 
   const v = value.toLowerCase();
 
-  // FULL sunlight
-  if (
-    v.includes("full") ||
-    v.includes("direct") ||
-    v.includes("6") ||
-    v.includes("7") ||
-    v.includes("8")
-  ) {
+  if (v.includes("full") || v.includes("direct") || v.match(/[6-9]/)) {
     return "FULL";
   }
 
-  // MEDIUM sunlight
-  if (
-    v.includes("partial") ||
-    v.includes("moderate") ||
-    v.includes("4") ||
-    v.includes("5")
-  ) {
+  if (v.includes("partial") || v.includes("moderate") || v.match(/[4-5]/)) {
     return "MEDIUM";
   }
 
-  // LOW sunlight
   return "LOW";
 };
 
-const mapWater = (value?: string): "LOW" | "MEDIUM" | "HIGH" => {
+// 💧 Water mapper
+const mapWater = (value?: string): Water => {
   if (!value) return "MEDIUM";
 
   const v = value.toLowerCase();
@@ -59,78 +55,97 @@ const mapWater = (value?: string): "LOW" | "MEDIUM" | "HIGH" => {
 
   return "LOW";
 };
-const getSpaceCompatibility = (plant: any): ("BALCONY" | "TERRACE" | "INDOOR" | "BACKYARD" | "ROOFTOP" | "GREENHOUSE" | "FARM" | "COMMUNITY_GARDEN" | "VERTICAL_GARDEN")[] => {
-  const name = plant.common_name?.toLowerCase() || "";
+
+// 🏡 Space compatibility
+const getSpaceCompatibility = (plant: any): SpaceType[] => {
   const category = plant.category?.toLowerCase() || "";
+  const life = plant.life_cycle?.toLowerCase() || "";
 
-  // 🌿 Herbs & leafy → small space
   if (category.includes("leafy") || category.includes("herb")) {
-    return ["INDOOR", "BALCONY", "TERRACE"];
+    return [SpaceType.INDOOR, SpaceType.BALCONY, SpaceType.TERRACE];
   }
 
-  // 🌱 Normal vegetables
   if (category.includes("vegetable")) {
-    return ["BALCONY", "TERRACE", "BACKYARD"];
+    return [SpaceType.BALCONY, SpaceType.TERRACE, SpaceType.BACKYARD];
   }
 
-  // 🌾 Root crops (need soil depth)
   if (category.includes("root")) {
-    return ["BACKYARD", "FARM"];
+    return [SpaceType.BACKYARD, SpaceType.FARM];
   }
 
-  // 🌳 Trees / large plants
-  if (plant.life_cycle?.toLowerCase().includes("perennial")) {
-    return ["FARM", "BACKYARD"];
+  if (life.includes("perennial")) {
+    return [SpaceType.FARM, SpaceType.BACKYARD];
   }
 
-  // Default fallback
-  return ["BALCONY", "TERRACE"];
+  return [SpaceType.BALCONY, SpaceType.TERRACE];
 };
+
+// 🚀 MAIN FUNCTION
 async function main() {
+  console.log("🌱 Seeding started...");
+
   for (const plant of plants) {
-  await prisma.plant.upsert({
-    where: { plantId: plant.plant_id },
+    if (!plant.plant_id) {
+      console.warn("⚠️ Skipping invalid plant:", plant);
+      continue;
+    }
 
-    update: {},
+    await prisma.plant.upsert({
+      where: { plantId: plant.plant_id },
+      update: {},
 
-    create: {
-      plantId: plant.plant_id,
-      commonName: plant.common_name,
-      scientificName: plant.scientific_name,
-      family: plant.family,
-      genus: plant.genus,
-      species: plant.species,
-      order: plant.order,
-      category: plant.category,
-      cropType: plant.crop_type,
-      lifeCycle: plant.life_cycle,
-      className: plant.class,
-      origin: plant.origin,
-      division: plant.division,
-      localNames: plant.local_names,
-      suitableClimate: plant.suitable_climate,
-      kingdom: plant.kingdom,
-      minTemp: plant.ideal_temperature_celsius?.min,
-      maxTemp: plant.ideal_temperature_celsius?.max,
+      create: {
+        plantId: plant.plant_id,
+        commonName: plant.common_name,
+        scientificName: plant.scientific_name ?? null,
 
-      soilType: plant.soil_type,
-      sunlightRequirement: mapSunlight(plant.sunlight_requirement),
-      wateringRequirement: mapWater(plant.watering_requirement),
-      spaceType : getSpaceCompatibility(plant),
+        family: plant.family ?? null,
+        genus: plant.genus ?? null,
+        species: plant.species ?? null,
+        order: plant.order ?? null,
+        className: plant.class ?? null,
+        division: plant.division ?? null,
+        kingdom: plant.kingdom ?? null,
 
-      growthStages: plant.growth_stages,
-      nutrientRequirements: plant.nutrient_requirements,
-      uses: plant.uses,
-      commonIssues: plant.common_issues,
+        category: plant.category,
+        categoryType: plant.categoryType ?? null,
 
-      isSupportedByModel: plant.is_supported_by_model,
-      imageUrls: plant.image_urls,
-    },
-  });
+        cropType: plant.crop_type ?? null,
+        lifeCycle: plant.life_cycle ?? null,
+        origin: plant.origin ?? null,
+
+        localNames: plant.local_names ?? null,
+        suitableClimate: plant.suitable_climate ?? null,
+
+        minTemp: plant.ideal_temperature_celsius?.min ?? 20,
+        maxTemp: plant.ideal_temperature_celsius?.max ?? 30,
+
+        soilType: plant.soil_type ?? null,
+
+        sunlightRequirement: mapSunlight(plant.sunlight_requirement),
+        wateringRequirement: mapWater(plant.watering_requirement),
+
+        spaceType: getSpaceCompatibility(plant),
+
+        growthStages: plant.growth_stages ?? null,
+        nutrientRequirements: plant.nutrient_requirements ?? null,
+        uses: plant.uses ?? null,
+        commonIssues: plant.common_issues ?? null,
+
+        isSupportedByModel: plant.is_supported_by_model ?? false,
+        imageUrls: plant.image_urls ?? null,
+      },
+    });
+  }
+
+  console.log("✅ Seeding completed successfully");
 }
-}
 
+// ▶️ RUN
 main()
-  .then(() => console.log("✅ Data inserted"))
-  .catch(console.error)
-  .finally(() => prisma.$disconnect());
+  .catch((err) => {
+    console.error("❌ Error:", err);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

@@ -50,7 +50,7 @@ const CreateGarden = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white flex justify-center items-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white flex justify-center items-center p-3 sm:p-4 md:p-6">
       <Card className="w-full max-w-2xl shadow-xl rounded-2xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold flex items-center gap-2">
@@ -63,7 +63,7 @@ const CreateGarden = () => {
 
           {/* Garden Name */}
           <div>
-            <label className="text-sm font-medium">Garden Name</label>
+            <label className="text-xs sm:text-sm font-medium">Garden Name</label>
             <Input
               value={form.name}
               onChange={(e) => setField("name", e.target.value)}
@@ -73,12 +73,13 @@ const CreateGarden = () => {
           {/* Space Type */}
           <div>
             <label className="text-sm font-medium">Space Type</label>
-            <div className="flex gap-2 flex-wrap mt-2">
+            <div className="flex gap-1.5 sm:gap-2 flex-wrap mt-2">
               {spaceTypes.map((type) => (
                 <Button
                   key={type}
                   variant={form.spaceType === type ? "default" : "outline"}
                   onClick={() => setField("spaceType", type)}
+                  className="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm"
                 >
                   {formatLabel(type)}
                 </Button>
@@ -88,7 +89,7 @@ const CreateGarden = () => {
 
           {/* Area */}
           <div>
-            <label className="text-sm font-medium">Area (sq ft)</label>
+            <label className="text-xs sm:text-sm font-medium">Area (sq ft)</label>
             <Input
               type="number"
               value={form.area}
@@ -98,7 +99,7 @@ const CreateGarden = () => {
 
           {/* Location */}
           <div>
-            <label className="text-sm font-medium">Location</label>
+            <label className="text-xs sm:text-sm font-medium">Location</label>
             <div className="flex gap-2 mt-2">
               <Input
                 value={weather?.name || "Not detected"}
@@ -111,7 +112,7 @@ const CreateGarden = () => {
 
           {/* Sunlight */}
           <div>
-            <label className="text-sm font-medium">Sunlight</label>
+            <label className="text-xs sm:text-sm font-medium">Sunlight</label>
             <div className="flex gap-2 flex-wrap mt-2">
               {["LOW", "MEDIUM", "FULL"].map((s) => (
                 <Button
@@ -127,7 +128,7 @@ const CreateGarden = () => {
 
           {/* Water */}
           <div>
-            <label className="text-sm font-medium">Water Availability</label>
+            <label className="text-xs sm:text-sm font-medium">Water Availability</label>
             <div className="flex gap-2 flex-wrap mt-2">
               {["LOW", "MEDIUM", "HIGH"].map((w) => (
                 <Button

@@ -14,7 +14,7 @@ export const verifyCaptcha = async (token: string) => {
       },
       body: `secret=${process.env.GOOGLE_RECAPTCHA_SECRET_KEY}&response=${token}`,
     }
-  );
+  ); 
   
   const data = await res.json();
   return data.success;

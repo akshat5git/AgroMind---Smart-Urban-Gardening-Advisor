@@ -1,0 +1,70 @@
+[{
+  "plant_id": "PLT310",
+  "common_name": "Fenugreek",
+  "scientific_name": "Trigonella foenum-graecum",
+  "family": "Fabaceae",
+  "kingdom": "Plantae",
+  "division": "Magnoliophyta",
+  "class": "Magnoliopsida",
+  "order": "Fabales",
+  "genus": "Trigonella",
+  "species": "T. foenum-graecum",
+
+  "category": "Leafy Vegetable / Spice",
+  "categoryType": "Vegetable",
+
+  "crop_type": "Leaf Crop",
+  "life_cycle": "Annual",
+
+  "local_names": {
+    "english": "Fenugreek",
+    "hindi": "Methi",
+    "bhojpuri": "Methi"
+  },
+
+  "origin": "Mediterranean / Asia",
+
+  "suitable_climate": ["Cool", "Dry"],
+
+  "ideal_temperature_celsius": {
+    "min": 12,
+    "max": 25
+  },
+
+  "soil_type": ["Loamy", "Well-drained"],
+
+  "sunlight_requirement": "Full Sun",
+  "watering_requirement": "Light to Moderate",
+
+  "growth_stages": [
+    "Germination",
+    "Leaf Growth",
+    "Flowering",
+    "Seed Formation",
+    "Harvest"
+  ],
+
+  "nutrient_requirements": [
+    "Phosphorus",
+    "Potassium",
+    "Sulfur"
+  ],
+
+  "common_issues": [
+    "Powdery Mildew",
+    "Root Rot",
+    "Aphids"
+  ],
+
+  "uses": [
+    "Leafy Food",
+    "Spice",
+    "Medicinal"
+  ],
+
+  "is_supported_by_model": true,
+  "image_urls": [],
+
+  "created_at": "2026-04-03T00:00:00Z"
+}
+]

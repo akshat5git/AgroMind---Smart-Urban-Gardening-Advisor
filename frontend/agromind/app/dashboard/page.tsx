@@ -1,85 +1,53 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  MapPin,
-  CloudSun,
-  Droplets,
-  Activity,
-  Navigation,
-  FileText,
-  Wind,
-  Eye
-} from "lucide-react";
-import { GardenManager } from "@/components/GardenManager";
-import Link from "next/link";
+import Sidebar from "@/components/slidebar/Slidebar";
+
+
+
+import GardensSection from "@/components/GardenManager";
+
 import { useSession } from "next-auth/react";
-import Weather from "@/components/weather/Weather";
+import InsightCard from "@/components/dashboard/insightcard";
+import TasksCard from "@/components/dashboard/tasksCard";
+import QuickActions from "@/components/dashboard/quickaction";
+import WeatherCard from "@/components/weather/Weather";
+
 export default function Dashboard() {
-  
   const { data: session } = useSession();
-  console.log("Session data:", session);
 
   return (
-    <div className="p-6 min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      <div className="max-w-7xl mx-auto">
+    <div className="flex bg-gray-50 min-h-screen">
 
-        {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold">
-            Hii back, {session?.user?.name} 👋
-          </h1>
+      <Sidebar />
+
+      <div className="flex-1 md:ml-64 p-4 md:p-6 space-y-6">
+
+        {/* HEADER */}
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold">
+              Hi, {session?.user?.name} 👋
+            </h1>
+            <p className="text-gray-500 text-sm">
+              Good Evening 🌆
+            </p>
+          </div>
         </div>
 
-        {/* Weather */}
-        <Weather />
-        
-        {/* Garden */}
-        <GardenManager />
+        {/* WEATHER */}
+        <WeatherCard />
 
-        {/* Actions */}
-        <div className="grid grid-cols-2 gap-4 mt-6">
-          <Link href="/dashboard/detect">
-            <Card className="cursor-pointer hover:shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex gap-2">
-                  <Activity /> Disease Detection
-                </CardTitle>
-                <CardDescription>
-                  Upload plant image
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link href="/dashboard/advisory">
-            <Card className="cursor-pointer hover:shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex gap-2">
-                  <FileText /> Advisory
-                </CardTitle>
-              </CardHeader>
-            </Card>
-          </Link>
-
+        {/* INSIGHT + TASKS */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <InsightCard />
+          <TasksCard />
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-4 mt-6">
-          <Card>
-            <CardContent className="text-center">
-              <p className="text-2xl">{history.length}</p>
-              <p>Total Activity</p>
-            </CardContent>
-          </Card>
+        {/* GARDENS */}
+        <GardensSection />
 
-          <Card>
-            <CardContent className="text-center">
-              <p className="text-2xl">{0}°C</p>
-              <p>Temp</p>
-            </CardContent>
-          </Card>
-        </div>
+        {/* QUICK ACTIONS */}
+        <QuickActions />
 
       </div>
     </div>

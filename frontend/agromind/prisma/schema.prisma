@@ -32,61 +32,59 @@ model Account {
 }
 
 model User {
-  id              String               @id @default(cuid())
-  name            String?
-  email           String?              @unique
-  password        String? // For email/password auth
-  emailVerified   DateTime?
-  image           String?
-  createdAt       DateTime             @default(now())
-  accounts        Account[]
-  sessions        Session[]
-  gardens         Garden[]
-  plantings       Planting[]
-  chatbotSessions ChatbotSession[]
-  posts           CommunityPost[]
-  careSchedules   CropRecommendation[]
+  id            String               @id @default(cuid())
+  name          String?
+  email         String?              @unique
+  password      String? // For email/password auth
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime             @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  gardens       Garden[]
+  plantings     Planting[]
+  chats         ChatSession[]
+  posts         CommunityPost[]
+  careSchedules CropRecommendation[]
 }
 
 model Session {
-
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
-
   identifier String
   token      String   @unique
   expires    DateTime
-  @@unique([identifier, token])
 
+  @@unique([identifier, token])
 }
 
 model Garden {
-  id        String @id @default(cuid())
-  name      String
+  id   String @id @default(cuid())
+  name String
 
-  spaceType SpaceType   // ✅ enum used
+  spaceType SpaceType // ✅ enum used
   area      Float
 
-  location  String
-  latitude  Float
-  longitude Float
+  location String
+  lat      Float
+  lon      Float
 
-  sunlight  Sunlight    // ✅ enum used
-  water     Water       // ✅ enum used
+  sunlight Sunlight // ✅ enum used
+  water    Water // ✅ enum used
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
   plantings Planting[]
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
 }
+
 enum Sunlight {
   LOW
   MEDIUM
@@ -110,33 +108,35 @@ enum SpaceType {
   COMMUNITY_GARDEN
   VERTICAL_GARDEN
 }
+
 model Plant {
-  id String @id @default(cuid())
+  id                  String      @id @default(cuid())
   // 🌱 Basic Info
-  plantId        String  @unique // "PLT001"
-  commonName     String
-  scientificName String?
-  family    String?
-  kingdom   String?
-  division  String?
-  className String? // "class" is reserved keyword
-  order     String?
-  genus     String?
-  species   String?
-  category  String
-  cropType  String?
-  lifeCycle String?
-  origin String?
+  plantId             String      @unique // "PLT001"
+  commonName          String
+  scientificName      String?
+  family              String?
+  kingdom             String?
+  division            String?
+  className           String? // "class" is reserved keyword
+  order               String?
+  genus               String?
+  species             String?
+  category            String
+  categoryType       String? // "Vegetable", "Fruit", etc.
+  cropType            String?
+  lifeCycle           String?
+  origin              String?
   // 🌍 Local Names
-  localNames Json? // { english, hindi, bhojpuri }
+  localNames          Json? // { english, hindi, bhojpuri }
   // 🌡️ Climate & Conditions
-  suitableClimate Json? // ["Warm", "Moderate Humidity"]
-  minTemp Float
-  maxTemp Float
-  soilType Json? // ["Loamy", "Well-drained"]
+  suitableClimate     Json? // ["Warm", "Moderate Humidity"]
+  minTemp             Float
+  maxTemp             Float
+  soilType            Json? // ["Loamy", "Well-drained"]
   sunlightRequirement Sunlight
   wateringRequirement Water
-  spaceType SpaceType[]
+  spaceType           SpaceType[]
 
   // 🌱 Growth Info
   growthStages Json? // ["Seedling", "Flowering", etc.]
@@ -156,11 +156,100 @@ model Plant {
 
   // 👤 Relations
   plantings Planting[]
+  diseases  PlantDisease[]
 
   // 📅 Metadata
   createdAt DateTime @default(now())
 
   // 🦠 Disease Relation
+}
+
+model Disease {
+  id String @id @default(cuid())
+
+  diseaseName String @unique
+
+  scientificName String?
+  diseaseType    DiseaseType
+
+  // 🌱 Category mapping (for filtering)
+  plantCategories String[] // ["Vegetable", "Fruit"]
+
+  description String?
+
+  affectedParts String[] // Leaf, Stem, Root
+  symptoms      String[]
+  causes        String[]
+
+  favorableMinTemp Float?
+  favorableMaxTemp Float?
+  humidity         String?
+  seasons          Season[]
+
+  spreadMethods String[]
+
+  severity SeverityLevel?
+
+  lifecycleStages String[] // Seedling, Flowering
+
+  // 🧪 Treatments
+  organicTreatments    Json?
+  chemicalTreatments   Json?
+  biologicalTreatments Json?
+
+  prevention String[]
+
+  economicImpact String?
+
+  isModelDetectable Boolean @default(false)
+
+  imageUrls Json?
+
+  createdAt DateTime @default(now())
+
+  // 🔗 Relation
+  plants PlantDisease[]
+}
+
+model PlantDisease {
+  id String @id @default(cuid())
+
+  plantId   String
+  diseaseId String
+
+  plant   Plant   @relation(fields: [plantId], references: [id])
+  disease Disease @relation(fields: [diseaseId], references: [id])
+
+  // 🌍 Extra intelligence
+  susceptibilityLevel SeverityLevel?
+  seasonalRisk        Season[]
+  regionSpecific      String[]
+
+  notes String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([plantId, diseaseId]) // prevent duplicates
+}
+
+enum DiseaseType {
+  FUNGAL
+  BACTERIAL
+  VIRAL
+  PEST
+  DEFICIENCY
+}
+
+enum SeverityLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Season {
+  KHARIF
+  RABI
+  ZAID
 }
 
 model Planting {
@@ -212,12 +301,11 @@ model PlantHealthReport {
 }
 
 model Weather {
-  id          String @id @default(cuid())
+  id          String   @id @default(cuid())
   location    String
   temperature Float
   humidity    Float
-
-  recordedAt DateTime
+  recordedAt  DateTime
 }
 
 model CropRecommendation {
@@ -228,31 +316,50 @@ model CropRecommendation {
   spaceType   String
 
   recommended Json // ["Basil", "Tomato"]
-
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
 }
 
-model ChatbotSession {
-  id     String @id @default(cuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  messages  ChatbotMessage[]
-  createdAt DateTime         @default(now())
+enum Role {
+  USER
+  ASSISTANT
+  SYSTEM
 }
 
-model ChatbotMessage {
-  id      String @id @default(cuid())
-  role    String // "user" | "ai"
-  content String
-
-  sessionId String
-  session   ChatbotSession @relation(fields: [sessionId], references: [id])
-
+model ChatSession {
+  id        String   @id @default(cuid())
+  userEmail String // 🔥 changed
+  title     String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  context     Json?
+  lastMessage String?
+  isPinned    Boolean @default(false)
+
+  // 🔥 relation via email
+  user     User      @relation(fields: [userEmail], references: [email])
+  messages Message[]
+
+  @@index([userEmail])
+  @@index([updatedAt])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  chatId    String
+  role      Role
+  content   String
+  createdAt DateTime @default(now())
+
+  // 🔥 Optional metadata
+  meta Json?
+
+  chat ChatSession @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@index([chatId])
+  @@index([createdAt])
 }
 
 model CommunityPost {

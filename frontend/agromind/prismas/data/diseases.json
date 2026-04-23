@@ -1,0 +1,132 @@
+[
+{
+  "diseaseName": "Early Blight",
+  "scientificName": "Alternaria solani",
+  "diseaseType": "FUNGAL",
+  "plantCategories": ["Vegetable"],
+  "description": "Common fungal disease affecting solanaceous crops.",
+  "affectedParts": ["Leaf", "Stem"],
+  "symptoms": ["Brown concentric rings", "Yellowing leaves", "Leaf drop"],
+  "causes": ["Warm humid weather", "Infected debris"],
+  "favorableMinTemp": 20,
+  "favorableMaxTemp": 30,
+  "humidity": "High",
+  "seasons": ["KHARIF"],
+  "spreadMethods": ["Wind", "Water splash"],
+  "severity": "HIGH",
+  "lifecycleStages": ["Vegetative"],
+  "organicTreatments": [
+    { "method": "Neem Oil Spray", "dosage": "5ml/L" },
+    { "method": "Compost Tea", "dosage": "Weekly spray" }
+  ],
+  "chemicalTreatments": [
+    { "name": "Mancozeb", "dosage": "2g/L" }
+  ],
+  "biologicalTreatments": [
+    { "agent": "Trichoderma", "use": "Soil application" }
+  ],
+  "prevention": [
+    "Crop rotation",
+    "Remove infected leaves",
+    "Maintain spacing",
+    "Avoid overhead irrigation"
+  ],
+  "economicImpact": "High",
+  "isModelDetectable": true
+},
+
+{
+  "diseaseName": "Late Blight",
+  "scientificName": "Phytophthora infestans",
+  "diseaseType": "FUNGAL",
+  "plantCategories": ["Vegetable"],
+  "description": "Severe disease causing rapid plant death.",
+  "affectedParts": ["Leaf", "Fruit"],
+  "symptoms": ["Water-soaked lesions", "White fungal growth underside"],
+  "causes": ["Cool moist climate"],
+  "favorableMinTemp": 10,
+  "favorableMaxTemp": 22,
+  "humidity": "Very High",
+  "seasons": ["RABI"],
+  "spreadMethods": ["Airborne spores"],
+  "severity": "HIGH",
+  "lifecycleStages": ["Flowering"],
+  "organicTreatments": [
+    { "method": "Copper Fungicide", "dosage": "3g/L" }
+  ],
+  "chemicalTreatments": [
+    { "name": "Chlorothalonil", "dosage": "2g/L" }
+  ],
+  "biologicalTreatments": [],
+  "prevention": [
+    "Use resistant varieties",
+    "Ensure drainage",
+    "Avoid wet foliage"
+  ],
+  "economicImpact": "Very High",
+  "isModelDetectable": true
+},
+
+{
+  "diseaseName": "Powdery Mildew",
+  "scientificName": "Erysiphe spp.",
+  "diseaseType": "FUNGAL",
+  "plantCategories": ["Vegetable", "Fruit"],
+  "description": "White powdery fungal growth on leaves.",
+  "affectedParts": ["Leaf"],
+  "symptoms": ["White powder coating", "Leaf curling"],
+  "causes": ["Dry warm conditions"],
+  "favorableMinTemp": 18,
+  "favorableMaxTemp": 28,
+  "humidity": "Low",
+  "seasons": ["ZAID"],
+  "spreadMethods": ["Wind"],
+  "severity": "MEDIUM",
+  "lifecycleStages": ["Vegetative"],
+  "organicTreatments": [
+    { "method": "Baking Soda Spray", "dosage": "1 tsp/L" }
+  ],
+  "chemicalTreatments": [
+    { "name": "Sulfur", "dosage": "2g/L" }
+  ],
+  "biologicalTreatments": [],
+  "prevention": [
+    "Increase air circulation",
+    "Avoid overcrowding",
+    "Sunlight exposure"
+  ],
+  "economicImpact": "Medium",
+  "isModelDetectable": true
+},
+
+{
+  "diseaseName": "Downy Mildew",
+  "scientificName": "Peronospora spp.",
+  "diseaseType": "FUNGAL",
+  "plantCategories": ["Vegetable"],
+  "description": "Fungal disease causing yellow patches.",
+  "affectedParts": ["Leaf"],
+  "symptoms": ["Yellow patches", "Grey mold underside"],
+  "causes": ["High humidity"],
+  "favorableMinTemp": 12,
+  "favorableMaxTemp": 20,
+  "humidity": "High",
+  "seasons": ["RABI"],
+  "spreadMethods": ["Air", "Water"],
+  "severity": "HIGH",
+  "lifecycleStages": ["Vegetative"],
+  "organicTreatments": [
+    { "method": "Neem Oil", "dosage": "5ml/L" }
+  ],
+  "chemicalTreatments": [
+    { "name": "Metalaxyl", "dosage": "2g/L" }
+  ],
+  "biologicalTreatments": [],
+  "prevention": [
+    "Avoid leaf wetness",
+    "Improve ventilation"
+  ],
+  "economicImpact": "High",
+  "isModelDetectable": true
+}
+]

@@ -1,4 +1,4 @@
- "use client"
+"use client"
 
 
 import { Button } from "../components/ui/button";
@@ -56,7 +56,7 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-green-50">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[50vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <ImageWithFallback
@@ -67,7 +67,7 @@ export default function Landing() {
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/30 via-transparent to-white"></div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-10 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function Landing() {
               <div className="bg-gradient-to-br from-emerald-500 to-green-600 p-4 rounded-2xl shadow-lg">
                 <Sprout className="w-12 h-12 text-white" />
               </div>
-              <h1 className="p-2 text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-emerald-600 to-green-700 bg-clip-text text-transparent">
+              <h1 className="p-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-emerald-600 to-green-700 bg-clip-text text-transparent">
                 AgroMind
               </h1>
             </motion.div>
@@ -113,12 +113,12 @@ export default function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
             >
               <Button
                 onClick={() => router.push("/signup")}
                 size="lg"
-                className="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white px-8 py-6 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
               >
                 Get Started Free
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -129,7 +129,7 @@ export default function Landing() {
                 }}
                 size="lg"
                 variant="outline"
-                className="border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 px-8 py-6 text-lg rounded-full shadow-lg transition-all duration-300"
+                className="border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg rounded-full shadow-lg transition-all duration-300"
               >
                 Learn More
               </Button>
@@ -196,7 +196,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}

@@ -1,0 +1,499 @@
+[{
+    "plant_id": "PLT001",
+    "common_name": "Tomato",
+    "scientific_name": "Solanum lycopersicum",
+    "family": "Solanaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Magnoliopsida",
+    "order": "Solanales",
+    "genus": "Solanum",
+    "species": "S. lycopersicum",
+    "category": "Vegetable",
+    "categoryType": "Vegetable",
+    "crop_type": "Fruit Vegetable",
+    "life_cycle": "Annual",
+    "origin": "South America",
+    "local_names": {
+        "english": "Tomato",
+        "hindi": "Tamatar",
+        "bhojpuri": "Tamatar"
+    },
+    "suitable_climate": [
+        "Warm"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 18,
+        "max": 30
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Moderate",
+    "growth_stages": [
+        "Seedling",
+        "Vegetative",
+        "Flowering",
+        "Fruiting"
+    ],
+    "nutrient_requirements": [
+        "Nitrogen",
+        "Potassium"
+    ],
+    "common_issues": [
+        "Blight",
+        "Aphids"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": true,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT002",
+    "common_name": "Potato",
+    "scientific_name": "Solanum tuberosum",
+    "family": "Solanaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Magnoliopsida",
+    "order": "Solanales",
+    "genus": "Solanum",
+    "species": "S. tuberosum",
+    "category": "Root Vegetable",
+    "categoryType": "Vegetable",
+    "crop_type": "Tuber",
+    "life_cycle": "Annual",
+    "origin": "South America",
+    "local_names": {
+        "english": "Potato",
+        "hindi": "Aloo",
+        "bhojpuri": "Aalu"
+    },
+    "suitable_climate": [
+        "Cool"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 10,
+        "max": 25
+    },
+    "soil_type": [
+        "Sandy Loam"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Moderate",
+    "growth_stages": [
+        "Sprouting",
+        "Tuber Formation",
+        "Harvest"
+    ],
+    "nutrient_requirements": [
+        "Potassium"
+    ],
+    "common_issues": [
+        "Late Blight"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": true,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT003",
+    "common_name": "Wheat",
+    "scientific_name": "Triticum aestivum",
+    "family": "Poaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Liliopsida",
+    "order": "Poales",
+    "genus": "Triticum",
+    "species": "T. aestivum",
+    "category": "Cereal",
+    "categoryType": "Cereal",
+    "crop_type": "Grain",
+    "life_cycle": "Annual",
+    "origin": "Middle East",
+    "local_names": {
+        "english": "Wheat",
+        "hindi": "Gehu",
+        "bhojpuri": "Gehu"
+    },
+    "suitable_climate": [
+        "Cool"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 12,
+        "max": 25
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Moderate",
+    "growth_stages": [
+        "Germination",
+        "Tillering",
+        "Heading",
+        "Ripening"
+    ],
+    "nutrient_requirements": [
+        "Nitrogen"
+    ],
+    "common_issues": [
+        "Rust"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": false,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT004",
+    "common_name": "Rice",
+    "scientific_name": "Oryza sativa",
+    "family": "Poaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Liliopsida",
+    "order": "Poales",
+    "genus": "Oryza",
+    "species": "O. sativa",
+    "category": "Cereal",
+    "categoryType": "Cereal",
+    "crop_type": "Grain",
+    "life_cycle": "Annual",
+    "origin": "Asia",
+    "local_names": {
+        "english": "Rice",
+        "hindi": "Chawal",
+        "bhojpuri": "Chawal"
+    },
+    "suitable_climate": [
+        "Wet"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 20,
+        "max": 35
+    },
+    "soil_type": [
+        "Clay"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "High",
+    "growth_stages": [
+        "Seedling",
+        "Tillering",
+        "Panicle",
+        "Harvest"
+    ],
+    "nutrient_requirements": [
+        "Nitrogen"
+    ],
+    "common_issues": [
+        "Blast"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": false,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT005",
+    "common_name": "Mango",
+    "scientific_name": "Mangifera indica",
+    "family": "Anacardiaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Magnoliopsida",
+    "order": "Sapindales",
+    "genus": "Mangifera",
+    "species": "M. indica",
+    "category": "Fruit",
+    "categoryType": "Fruit",
+    "crop_type": "Tree",
+    "life_cycle": "Perennial",
+    "origin": "India",
+    "local_names": {
+        "english": "Mango",
+        "hindi": "Aam",
+        "bhojpuri": "Aam"
+    },
+    "suitable_climate": [
+        "Tropical"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 24,
+        "max": 35
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Low",
+    "growth_stages": [
+        "Flowering",
+        "Fruiting"
+    ],
+    "nutrient_requirements": [
+        "Potassium"
+    ],
+    "common_issues": [
+        "Anthracnose"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": true,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT006",
+    "common_name": "Onion",
+    "scientific_name": "Allium cepa",
+    "family": "Amaryllidaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Liliopsida",
+    "order": "Asparagales",
+    "genus": "Allium",
+    "species": "A. cepa",
+    "category": "Vegetable",
+    "categoryType": "Vegetable",
+    "crop_type": "Bulb",
+    "life_cycle": "Annual",
+    "origin": "Asia",
+    "local_names": {
+        "english": "Onion",
+        "hindi": "Pyaz",
+        "bhojpuri": "Piyaz"
+    },
+    "suitable_climate": [
+        "Cool"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 13,
+        "max": 25
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Moderate",
+    "growth_stages": [
+        "Bulb Formation"
+    ],
+    "nutrient_requirements": [
+        "Sulfur"
+    ],
+    "common_issues": [
+        "Purple Blotch"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": true,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT007",
+    "common_name": "Garlic",
+    "scientific_name": "Allium sativum",
+    "family": "Amaryllidaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Liliopsida",
+    "order": "Asparagales",
+    "genus": "Allium",
+    "species": "A. sativum",
+    "category": "Vegetable",
+    "categoryType": "Vegetable",
+    "crop_type": "Bulb",
+    "life_cycle": "Annual",
+    "origin": "Asia",
+    "local_names": {
+        "english": "Garlic",
+        "hindi": "Lehsun",
+        "bhojpuri": "Lahsun"
+    },
+    "suitable_climate": [
+        "Cool"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 12,
+        "max": 24
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Low",
+    "growth_stages": [
+        "Bulb Growth"
+    ],
+    "nutrient_requirements": [
+        "Nitrogen"
+    ],
+    "common_issues": [
+        "White Rot"
+    ],
+    "uses": [
+        "Food",
+        "Medicinal"
+    ],
+    "is_supported_by_model": true,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT008",
+    "common_name": "Banana",
+    "scientific_name": "Musa acuminata",
+    "family": "Musaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Liliopsida",
+    "order": "Zingiberales",
+    "genus": "Musa",
+    "species": "M. acuminata",
+    "category": "Fruit",
+    "categoryType": "Fruit",
+    "crop_type": "Tree",
+    "life_cycle": "Perennial",
+    "origin": "Asia",
+    "local_names": {
+        "english": "Banana",
+        "hindi": "Kela",
+        "bhojpuri": "Kela"
+    },
+    "suitable_climate": [
+        "Tropical"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 25,
+        "max": 35
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "High",
+    "growth_stages": [
+        "Vegetative",
+        "Fruiting"
+    ],
+    "nutrient_requirements": [
+        "Potassium"
+    ],
+    "common_issues": [
+        "Panama Disease"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": true,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT009",
+    "common_name": "Chickpea",
+    "scientific_name": "Cicer arietinum",
+    "family": "Fabaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Magnoliopsida",
+    "order": "Fabales",
+    "genus": "Cicer",
+    "species": "C. arietinum",
+    "category": "Pulse",
+    "categoryType": "Pulse",
+    "crop_type": "Legume",
+    "life_cycle": "Annual",
+    "origin": "Middle East",
+    "local_names": {
+        "english": "Chickpea",
+        "hindi": "Chana",
+        "bhojpuri": "Chana"
+    },
+    "suitable_climate": [
+        "Cool"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 10,
+        "max": 25
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Low",
+    "growth_stages": [
+        "Flowering",
+        "Pod Formation"
+    ],
+    "nutrient_requirements": [
+        "Nitrogen"
+    ],
+    "common_issues": [
+        "Wilt"
+    ],
+    "uses": [
+        "Food"
+    ],
+    "is_supported_by_model": false,
+    "image_urls": []
+},
+{
+    "plant_id": "PLT010",
+    "common_name": "Mustard",
+    "scientific_name": "Brassica juncea",
+    "family": "Brassicaceae",
+    "kingdom": "Plantae",
+    "division": "Magnoliophyta",
+    "class": "Magnoliopsida",
+    "order": "Brassicales",
+    "genus": "Brassica",
+    "species": "B. juncea",
+    "category": "Oilseed",
+    "categoryType": "Oilseed",
+    "crop_type": "Seed",
+    "life_cycle": "Annual",
+    "origin": "India",
+    "local_names": {
+        "english": "Mustard",
+        "hindi": "Sarson",
+        "bhojpuri": "Sarso"
+    },
+    "suitable_climate": [
+        "Cool"
+    ],
+    "ideal_temperature_celsius": {
+        "min": 10,
+        "max": 25
+    },
+    "soil_type": [
+        "Loamy"
+    ],
+    "sunlight_requirement": "Full Sun",
+    "watering_requirement": "Low",
+    "growth_stages": [
+        "Flowering",
+        "Seed"
+    ],
+    "nutrient_requirements": [
+        "Sulfur"
+    ],
+    "common_issues": [
+        "White Rust"
+    ],
+    "uses": [
+        "Oil"
+    ],
+    "is_supported_by_model": false,
+    "image_urls": []
+}
+]

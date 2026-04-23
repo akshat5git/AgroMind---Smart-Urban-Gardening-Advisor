@@ -11,8 +11,8 @@ type GardenForm = {
   spaceType: string;
   area: string;
   location: string;
-  latitude: number | null;
-  longitude: number | null;
+  lat: number | null;
+  lon: number | null;
   sunlight: string;
   water: string;
   planting: SelectedPlant[];
@@ -36,8 +36,8 @@ export const useGardenStore = create<GardenState>((set) => ({
     spaceType: "",
     area: "",
     location: "",
-    latitude: null,
-    longitude: null,
+    lat: null,
+    lon: null,
     sunlight: "",
     water: "",
     planting: [],
@@ -51,10 +51,10 @@ export const useGardenStore = create<GardenState>((set) => ({
   setLocation: (lat, lon) =>
     set((state) => ({
       form: {
-        ...state.form,
-        latitude: lat,
-        longitude: lon,
-        location: "Detected Location",
+        ...state.form, 
+        lat: lat, 
+        lon: lon,  
+        location: "Detected Location", 
       },
     })),
 
@@ -69,11 +69,11 @@ export const useGardenStore = create<GardenState>((set) => ({
   togglePlant: (plant) =>
     set((state) => {
       const exists = state.form.planting.find((p) => p.id === plant.id);
-
+      
       if (exists) {
         return {
           form: {
-            ...state.form,
+            ...state.form , 
             planting: state.form.planting.filter(
               (p) => p.id !== plant.id
             ),
@@ -96,8 +96,8 @@ export const useGardenStore = create<GardenState>((set) => ({
         spaceType: "",
         area: "",
         location: "",
-        latitude: null,
-        longitude: null,
+        lat: null,
+        lon: null,
         sunlight: "",
         water: "",
         planting: [],

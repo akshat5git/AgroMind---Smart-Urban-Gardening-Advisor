@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate, Link, useLocation } from "react-router";
+ "use client";
+
+import { useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "../context/UserContext";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -13,26 +16,25 @@ import {
   Users,
   LogOut,
   Menu,
-  X,
   FileText,
 } from "lucide-react";
 
-export function MainLayout() {
+export function MainLayout({ children }: { children?: ReactNode }) {
   const { user, logout, isAuthenticated } = useUser();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/login");
+      router.push("/signin");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, router]);
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   if (!isAuthenticated) {
     return null;
@@ -66,9 +68,9 @@ export function MainLayout() {
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = location.pathname === item.path;
+          const isActive = pathname === item.path;
           return (
-            <Link key={item.path} to={item.path}>
+            <Link key={item.path} href={item.path}>
               <Button
                 variant={isActive ? "secondary" : "ghost"}
                 className={`w-full justify-start relative ${
@@ -105,7 +107,7 @@ export function MainLayout() {
           className="w-full"
           onClick={() => {
             logout();
-            navigate("/login");
+            router.push("/signin");
           }}
         >
           <LogOut className="size-4 mr-2" />
@@ -147,7 +149,7 @@ export function MainLayout() {
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto lg:mt-0 mt-16">
-        <Outlet />
+        {children}
       </div>
     </div>
   );

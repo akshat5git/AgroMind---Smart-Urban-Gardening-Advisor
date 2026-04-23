@@ -2,10 +2,17 @@ import { create } from "zustand";
 
 type WeatherData = {
   name: string;
+
+  coord: {
+    lat: number;
+    lon: number;
+  };
+
   main: {
     temp: number;
     humidity: number;
-  };
+  }; 
+
   weather: {
     description: string;
   }[];
@@ -15,7 +22,6 @@ type WeatherState = {
   weather: WeatherData | null;
   fetchingLocation: boolean;
 
-  // actions
   setWeather: (data: WeatherData) => void;
   setFetchingLocation: (loading: boolean) => void;
   clearWeather: () => void;

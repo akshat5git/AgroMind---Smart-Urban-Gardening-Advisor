@@ -7,21 +7,13 @@ export async function POST(req: Request) {
   const body = await req.json();
 
   const { temp, sunlight, water, spaceType } = body;
-
+  console.log(temp , sunlight, water, spaceType)
   try {
     const plants = await prisma.plant.findMany({
-      where: {
-        minTemp: { lte: temp },
-        maxTemp: { gte: temp },
-
-        spaceType: {
-          has: spaceType,
-        },
-        wateringRequirement: water,
-        sunlightRequirement: sunlight,
-      },
+      
 
     });
+    console.log(plants);
 
     return NextResponse.json(plants);
   }

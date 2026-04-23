@@ -61,7 +61,7 @@ export default function Login() {
     });
 
     setLoading(false);
-      captchaRef.current?.reset();
+    captchaRef.current?.reset();
 
     if (result?.ok) {
       router.push("/dashboard");
@@ -71,8 +71,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 to-blue-50 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-green-50 px-3 sm:px-4 py-4 sm:py-8">
+      <Card className="w-full max-w-md sm:max-w-lg">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="size-16 bg-green-600 rounded-full flex items-center justify-center">
@@ -86,7 +86,7 @@ export default function Login() {
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-3 sm:space-y-4 md:space-y-5">
             {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -96,6 +96,7 @@ export default function Login() {
                 placeholder="farmer@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base"
               />
               {email && !isValidEmail(email) && (
                 <p className="text-red-500 text-sm">
@@ -113,6 +114,7 @@ export default function Login() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base"
               />
               {password && !isValidPassword(password) && (
                 <p className="text-red-500 text-sm">
@@ -129,7 +131,7 @@ export default function Login() {
 
             {/* Error */}
             {error && (
-              <p className="text-red-500 text-sm">{error+"#3"}</p>
+              <p className="text-red-500 text-sm">{error + "#3"}</p>
             )}
 
             {/* Button */}

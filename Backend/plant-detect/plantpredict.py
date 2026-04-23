@@ -133,4 +133,4 @@ def predict_image(img_path):
 # ============================================
 # RUN
 # ============================================
-predict_image(IMAGE_PATH)
+predict_image(IMAGE_PATH) 
