@@ -14,6 +14,7 @@ app.add_middleware(
 
 )
 
+
 @app.post("/predict")
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
